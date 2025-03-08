@@ -1,6 +1,7 @@
 package org.cerdBlog.blogServer.controller;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.cerdBlog.blogServer.dto.PostDTO;
 import org.cerdBlog.blogServer.entity.Post;
 import org.cerdBlog.blogServer.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class PostController {
     private PostService postService;
 
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody Post post)
+    public ResponseEntity<?> createPost(@RequestBody PostDTO postDTO)
     {
         try
         {
-            Post createdPost = postService.savePost(post);
+            Post createdPost = postService.savePost(postDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

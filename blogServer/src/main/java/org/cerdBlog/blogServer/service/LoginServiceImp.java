@@ -14,13 +14,11 @@ public class LoginServiceImp implements LoginService {
 
     @Override
     public Login getLogin(String userEmail, String userPassword) {
-        Login login = loginRepository.findById(userEmail)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+        Login login = loginRepository.findById(userEmail).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
 
         if (!login.getUserPassword().equals(userPassword)) {
-            throw new EntityNotFoundException("Senha inválida");
+            throw new EntityNotFoundException("Email ou senha invalidos");
         }
-
         return login;
     }
 

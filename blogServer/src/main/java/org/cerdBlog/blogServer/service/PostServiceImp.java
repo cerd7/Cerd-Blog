@@ -1,6 +1,7 @@
 package org.cerdBlog.blogServer.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.cerdBlog.blogServer.dto.PostDTO;
 import org.cerdBlog.blogServer.entity.Post;
 import org.cerdBlog.blogServer.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,9 @@ public class PostServiceImp implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public Post savePost(Post post)
-    {
+    @Override
+    public Post savePost(PostDTO postDTO) {
+        Post post = convertToEntity(postDTO);
         post.setLikeCount(0);
         post.setViewCount(0);
         post.setDate(new Date());
@@ -25,20 +27,40 @@ public class PostServiceImp implements PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAllPosts(){
+    @Override
+    public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
+    @Override
+    public Post getLastPostById(){
+        return postRepository.finTop
+    }
 
-    public Post getPostById(Long postId){
+    @Override
+    public Post getPostById(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        if(optionalPost.isPresent())
-        {
+        if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             post.setViewCount(post.getViewCount() + 1);
-            return postRepository.save(post);
-        }else {
+            postRepository.save(post);
+            return post;
+        } else {
             throw new EntityNotFoundException("Post not found!");
         }
+    }
+
+    private Post convertToEntity(PostDTO postDTO) {
+        Post post = new Post();
+        post.setId(postDTO.getId());
+        post.setName(postDTO.getName());
+        post.setContent(postDTO.getContent());
+        post.setPostedBy(postDTO.getPostedBy());
+        post.setImg(postDTO.getImg());
+        post.setDate(postDTO.getDate());
+        post.setLikeCount(postDTO.getLikeCount());
+        post.setViewCount(postDTO.getViewCount());
+        post.setTags(postDTO.getTags());
+        return post;
     }
 }
