@@ -5,7 +5,10 @@ import org.cerdBlog.blogServer.dto.PostDTO;
 import org.cerdBlog.blogServer.entity.Post;
 import org.cerdBlog.blogServer.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
 import java.util.List;
@@ -33,16 +36,23 @@ public class PostServiceImp implements PostService {
     }
 
     @Override
-    public Post getLastPostById(){
-        return postRepository.finTop
-    }
-
-    @Override
     public Post getPostById(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             post.setViewCount(post.getViewCount() + 1);
+            postRepository.save(post);
+            return post;
+        } else {
+            throw new EntityNotFoundException("Post not found!");
+        }
+    }
+
+    @Override
+    public Post getLastPostById() {
+        Optional<Post> lastPost = postRepository.findTopByOrderByIdDesc();
+        if (lastPost.isPresent()) {
+            Post post = lastPost.get();
             postRepository.save(post);
             return post;
         } else {
