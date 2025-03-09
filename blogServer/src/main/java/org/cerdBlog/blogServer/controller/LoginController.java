@@ -18,16 +18,16 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<?> authLogin(@RequestBody LoginDTO loginDTO) {
         try {
-            Login login = loginService.getLogin(loginDTO.getUserEmail(), loginDTO.getUserPassword());
+            Login login = loginService.authLogin(loginDTO.getUserEmail(), loginDTO.getUserPassword());
             return ResponseEntity.ok("Login realizado com sucesso!");
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 
-    @PostMapping("/register")
+    @PutMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Login newUser) {
         loginService.saveUser(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso!");
