@@ -1,0 +1,13 @@
+<body>
+    <form [formGroup]="postForm" class="post-form">
+      <h1 class="text-center">Login</h1>
+  
+      <input id="name" type="text" placeholder="e-mail*" formControlName="userEmail" class="cutom-input" />
+  
+      <input id="image" type="password" placeholder="senha*" formControlName="userPassword" class="cutom-input" />
+
+      <div class="form-footer">
+        <button class="custom-button" type="button" (click)="authLogin()">Login</button>
+      </div>
+    </form>
+  </body>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PostService } from '../../service/post.service';
+import { PostService } from '../../services/Service-Post/post.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from '@angular/common';
@@ -35,7 +35,7 @@ export class ViewPostComponent implements OnInit{
       this.postData = res;
       console.log(res);
     }, erros=> {
-      this.matSnackBar.open("Something went wrong!!!", "OK")
+      alert("Something went wrong!!!")
     })
   }
 }

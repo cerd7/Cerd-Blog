@@ -22,4 +22,8 @@ export class PostService {
   getPostById(postId:number): Observable<any>{
     return this.http.get(BASIC_URL + `api/posts/${postId}`);
   }
+
+  getLastPostById(): Observable<any>{
+    return this.http.get(BASIC_URL + `api/posts/last`);
+  }
 }

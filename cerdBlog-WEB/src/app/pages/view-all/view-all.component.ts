@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../service/post.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { PostService } from '../../services/Service-Post/post.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -24,8 +23,7 @@ import { RouterModule } from '@angular/router';
 export class ViewAllComponent implements OnInit{
   allPosts:any;
 
-  constructor(private postService: PostService,
-    private snackBar: MatSnackBar){}
+  constructor(private postService: PostService){}
 
     ngOnInit(): void {
       this.getAllPosts();
@@ -35,9 +33,8 @@ export class ViewAllComponent implements OnInit{
       this.postService.getAllPosts().subscribe(res =>{
         console.log(res);
         this.allPosts = res;
-        this.allPosts = res;
       }, error =>{
-        this.snackBar.open("Something went wrong!!!", "OK")
+        alert("Something went wrong!!!")
       })
     }
 }

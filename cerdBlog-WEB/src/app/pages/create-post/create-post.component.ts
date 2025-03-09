@@ -9,10 +9,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { PostService } from '../../service/post.service';
+import { PostService } from '../../services/Service-Post/post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -40,7 +39,6 @@ export class CreatePostComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar,
     private cdRef: ChangeDetectorRef,
     private postService: PostService,
   ){}
@@ -72,18 +70,17 @@ export class CreatePostComponent {
       data.tags = this.tags;
 
       if(this.postForm.invalid){
-        this.snackBar.open("Please fill all required fields!!!", "OK");
+        alert("Please fill all required fields!!!");
         return;
       }
-      
           this.postService.createNewPost(data).subscribe(res =>{
-          this.snackBar.open("Post created successfully !!!", "OK");
-          this.router.navigateByUrl("/");
+          alert("Post created successfully !!!");
+          this.router.navigateByUrl("/view-post/last");
       }, error=>{   
-          this.snackBar.open("Something went wrong!!!", "OK");
+          alert("Something went wrong!!!");
     })
   }
-
+  
     onKeyDown(event: KeyboardEvent){
       event.preventDefault();
   }
