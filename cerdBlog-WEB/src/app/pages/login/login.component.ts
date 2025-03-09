@@ -20,33 +20,39 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent 
 {
-  postForm!: FormGroup;
+  loginForm!: FormGroup;
 
   constructor(
-      private fb: FormBuilder,
+      private formBuilder: FormBuilder,
       private login: LoginAuthService,
       private router: Router,
   ){}
 
   ngOnInit() {
-    this.postForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       userEmail: [null, Validators.required],
       userPassword: [null, Validators.required]
     });
   }
   authLogin(){
-    const auth = this.postForm.value;
+    const auth = this.loginForm.value;
 
-    if(this.postForm.invalid){
+    if(this.loginForm.invalid){
       alert("Please fill all required fields!!!");
       return;
     }
 
     this.login.authLogin(auth).subscribe(res =>{
-      alert("Login successfully !!!");
-      this.router.navigateByUrl("/home-blog");
+      console.log(res);
+      if(res)
+      {
+        alert("Login successfully !!!");
+        this.router.navigateByUrl("/home-blog");
+      }else{
+        alert("Set corretly Email or Password !!!");
+      }
     }, 
-    error=> {
+    erro=> {
       alert("Something went wrong!!!")
     })
   }

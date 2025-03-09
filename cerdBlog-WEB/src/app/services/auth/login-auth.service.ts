@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, mapTo, Observable, of, tap } from 'rxjs';
 
-const BASIC_URL = 'http://localhost:8080/';
+const BASIC_URL = 'http://localhost:8080/api/login';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,16 @@ const BASIC_URL = 'http://localhost:8080/';
 export class LoginAuthService {
   constructor(private http: HttpClient) { }
 
-  authLogin(auth:any): Observable<boolean>{
-      return this.http.post(BASIC_URL + `api/login`, auth).pipe(
-        mapTo(true),
-        catchError(error => {
-          console.error(error);
-          return of(false);
-        })
-      );
-    }
+  authLogin(auth:string): Observable<boolean>{
+    return this.http.post<{ token: string }>(BASIC_URL, { auth }).pipe(
+      tap(response => {
+        localStorage.setItem('token', response.token); // Armazenar o token JWT no localStorage
+      }),
+      mapTo(true),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
+  }    
 }
