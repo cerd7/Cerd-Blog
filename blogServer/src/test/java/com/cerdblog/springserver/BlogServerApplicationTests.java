@@ -1,4 +1,4 @@
-package org.cerdBlog.blogServer;
+package com.cerdblog.springserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

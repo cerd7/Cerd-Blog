@@ -1,14 +1,12 @@
-package org.cerdBlog.blogServer.service;
+package com.cerdblog.springserver.service.serviceImp;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.cerdBlog.blogServer.dto.PostDTO;
-import org.cerdBlog.blogServer.entity.Post;
-import org.cerdBlog.blogServer.repository.PostRepository;
+import com.cerdblog.springserver.dto.PostDTO;
+import com.cerdblog.springserver.entity.Post;
+import com.cerdblog.springserver.repository.PostRepository;
+import com.cerdblog.springserver.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
 import java.util.List;

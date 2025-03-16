@@ -1,8 +1,8 @@
-package org.cerdBlog.blogServer.service;
+package com.cerdblog.springserver.service;
 
 
-import org.cerdBlog.blogServer.dto.PostDTO;
-import org.cerdBlog.blogServer.entity.Post;
+import com.cerdblog.springserver.dto.PostDTO;
+import com.cerdblog.springserver.entity.Post;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
-package org.cerdBlog.blogServer.repository;
+package com.cerdblog.springserver.repository;
 
 
-import org.cerdBlog.blogServer.dto.PostDTO;
-import org.cerdBlog.blogServer.entity.Post;
+import com.cerdblog.springserver.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
