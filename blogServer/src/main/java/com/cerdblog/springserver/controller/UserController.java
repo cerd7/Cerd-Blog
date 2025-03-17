@@ -2,8 +2,9 @@ package com.cerdblog.springserver.controller;
 
 import com.cerdblog.springserver.authentication.util.JwtUtils;
 import com.cerdblog.springserver.service.serviceImp.UserServiceImp;
-import com.cerdblog.springserver.dto.UserDTO;qqq
+import com.cerdblog.springserver.dto.UserDTO;
 import com.cerdblog.springserver.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/login")
-@CrossOrigin(origins = "*")
-public class UserController {
+@CrossOrigin(origins = "http://localhost:4200")
+public class UserController{
 
     private final AuthenticationManager authenticationManager;
     private final UserServiceImp userServiceImp;
     private final JwtUtils jwtUtils;
 
+    @Autowired
     public UserController(AuthenticationManager authenticationManager, UserServiceImp userServiceImp, JwtUtils jwtUtils)
     {
         this.authenticationManager = authenticationManager;
