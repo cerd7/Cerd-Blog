@@ -1,0 +1,133 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh;
+  margin: 0; 
+  z-index: 2;
+}
+
+.text-center{
+  display: flex;
+  justify-content: center;
+}
+
+.post-form{
+  max-width: 600px;
+  width: 100%;
+  
+  filter: drop-shadow(0 0 5px rgba(37, 37, 37, 0.6));
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-input, .custom-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.custom-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.custom-input:focus, .custom-textarea:focus {
+  border-color: #6200ea;
+  outline: none;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  font-weight: bold;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.tag-item {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.remove-icon {
+  cursor: pointer;
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+}
+
+.tag-input {
+  flex-grow: 1;
+  min-width: 120px;
+}
+
+.custom-button {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px 24px;
+  background-color: #030303;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #434244;
+}
+
+.custom-button:active {
+  transform: scale(0.98);
+}
+
+.form-footer{
+  display: flex;
+  justify-content:flex-end;
+  margin-right: 10px;
+}
+
+/*bellow the Id's*/
+#name{
+  padding: 10px;
+  margin: 10px;
+}
+  
+#image{
+  padding: 10px;
+  margin: 10px;
+}
+
+#content{
+  padding: 10px;
+  margin: 10px;
+}
+
+#postedBy{
+  padding: 10px;
+  margin: 10px;
+}
+
+#tag-input{
+  padding: 10px;
+  margin: 10px;
+}

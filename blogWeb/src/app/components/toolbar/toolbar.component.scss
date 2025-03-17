@@ -1,0 +1,53 @@
+.master-div {
+    background-color: rgba(0, 0, 0, 0.932);
+    filter: drop-shadow(0 0 5px rgba(73, 73, 73, 0.671));
+
+    color: rgb(255, 255, 255);
+    padding: 4px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tool-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  #name-owner {
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .align-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .custom-button {
+    width: 100%;
+    max-width: 200px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    cursor: pointer;
+  }
+  
+  .custom-button:hover {
+    background-color: #434244;
+  }
+  
+  .custom-button:active {
+    transform: scale(0.98);
+  }
+  

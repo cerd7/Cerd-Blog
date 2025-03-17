@@ -1,0 +1,27 @@
+<body>
+  <form [formGroup]="postForm" class="post-form">
+    
+    <h1 class="text-center">Creating a post...</h1>
+
+    <input id="name" type="text" placeholder="Name*" formControlName="name" class="cutom-input" />
+
+    <input id="image" type="text" placeholder="Image*" formControlName="img" class="cutom-input" />
+
+    <textarea id="content" rows="5" placeholder="Content*" formControlName="content" class="cutom-input"></textarea>
+
+    <input id="postedBy" type="text" placeholder="posted By*" formControlName="postedBy" class="cutom-input" />
+
+    <div class="tags-container">
+      <span *ngFor="let tag of tags; let i = index" class="tag-item">
+        {{ tag }}
+        <mat-icon class="remove-icon" (click)="remove(i)">cancel</mat-icon>
+      </span>
+    </div>
+
+    <input id="tag-input" type="text" placeholder="Add a tag..." (keyup.enter)="add($event)" class="tag-input" />
+
+    <div class="form-footer">
+      <button class="custom-button" type="button" (click)="createPost()">Create new post</button>
+    </div>
+  </form>
+</body>
