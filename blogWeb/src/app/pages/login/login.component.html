@@ -1,13 +1,13 @@
 <body>
-    <form [formGroup]="loginForm" class="post-form">
+    <form (ngSubmit)="authLogin()" class="post-form">
       <h1 class="text-center">Login</h1>
   
-      <input type="text" placeholder="e-mail*" id="name" formControlName="userEmail" class="cutom-input" />
+      <input type="text" placeholder="username" id="name" [(ngModel)]="username" name="username" class="cutom-input" required>
   
-      <input type="password" placeholder="senha*" id="image"  formControlName="userPassword" class="cutom-input" />
+      <input type="password" placeholder="senha*" id="image"  [(ngModel)]="userPassword" name="userPassword" class="cutom-input" required>
 
       <div class="form-footer">
-        <button class="custom-button" type="button" (click)="authLogin()">Login</button>
+        <button class="custom-button" type="submit">Login</button>
       </div>
     </form>
   </body>

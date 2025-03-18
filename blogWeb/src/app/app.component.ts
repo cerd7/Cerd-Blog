@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BackgroundComponent } from "./components/background/background.component";
+import { LoginAuthService } from './services/auth/login-auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +15,14 @@ import { BackgroundComponent } from "./components/background/background.componen
 })
 export class AppComponent {
   title: any;
+  isLoggedIn: Observable<boolean>;
+  isLoginFailed = false;
+
+  constructor(private authService: LoginAuthService) {
+    this.isLoggedIn = this.authService.isAuthenticated$;
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

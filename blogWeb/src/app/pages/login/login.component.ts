@@ -20,7 +20,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent 
 {
-  loginForm!: FormGroup;
+  username:string = '';
+  userPassword: string = '';
+  isLoginFailed = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -28,27 +30,16 @@ export class LoginComponent
       private router: Router,
   ){}
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      userEmail: [null, Validators.required],
-      userPassword: [null, Validators.required]
-    });
-  }
   authLogin(){
-    const auth = this.loginForm.value;
-
-    if(this.loginForm.invalid){
-      alert("Please fill all required fields!!!");
-      return;
-    }
-
-    this.login.authLogin(auth).subscribe(res =>{
-      console.log(res);
-      if(res)
+    this.login.authLogin(this.username, this.userPassword).subscribe(isAuthenticated =>{
+      console.log(isAuthenticated);
+      if(isAuthenticated)
       {
+        this.isLoginFailed = false;
         alert("Login successfully !!!");
         this.router.navigateByUrl("/home-blog");
       }else{
+        this.isLoginFailed = true;
         alert("Set corretly Email or Password !!!");
       }
     }, 
