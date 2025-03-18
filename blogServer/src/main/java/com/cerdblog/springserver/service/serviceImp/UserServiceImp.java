@@ -24,9 +24,9 @@ public class UserServiceImp implements UserDetailsService{
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public User saveUser(User user) {
+    public void saveUser(User user) {
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public Optional<User> findByUsername(String username) {
@@ -44,5 +44,9 @@ public class UserServiceImp implements UserDetailsService{
                 .password(user.getUserPassword())
                 .authorities("USER")
                 .build();
+    }
+
+    public boolean validatePassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 }

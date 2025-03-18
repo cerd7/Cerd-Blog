@@ -13,9 +13,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/login")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class UserController{
 
     private final AuthenticationManager authenticationManager;
@@ -30,13 +33,14 @@ public class UserController{
         this.jwtUtils = jwtUtils;
     }
 
-    @PutMapping("/register")
+    @PostMapping("/register") // De PutMapping para PostMapping
     public ResponseEntity<?> registerUser(@RequestBody UserDTO newUser) {
-        if(userServiceImp.findByUsername(newUser.getUsername()).isPresent())
-        {
+        User userRegisterEntity = new User(newUser);
+
+        if (userServiceImp.findByUsername(userRegisterEntity.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken");
         }
-        User userRegisterEntity = new User(newUser);
+
         userServiceImp.saveUser(userRegisterEntity);
         return ResponseEntity.ok("User registered successfully");
     }
@@ -46,10 +50,13 @@ public class UserController{
         try {
             User userEntityLogin = new User(usernameLogin);
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userEntityLogin.getUsername(), usernameLogin.getUserPassword()));
+                    new UsernamePasswordAuthenticationToken(userEntityLogin.getUsername(), userEntityLogin.getUserPassword()));
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
             String jwt = jwtUtils.generateToken(userDetails);
-            return ResponseEntity.ok(jwt);
+            Map<String, String> response = new HashMap<>();
+            response.put("TOKEN", jwt);
+            return ResponseEntity.ok(response);
         }catch (AuthenticationException e)
         {
             return ResponseEntity.status(401).body("Invalid username or password");

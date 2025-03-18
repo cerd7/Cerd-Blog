@@ -19,6 +19,9 @@ public class User {
     @Column
     private String userPassword;
 
+    public User()
+    {}
+
     public User(UserDTO userDTO)
     {
         BeanUtils.copyProperties(userDTO, this);

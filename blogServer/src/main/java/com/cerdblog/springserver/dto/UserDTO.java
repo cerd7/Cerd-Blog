@@ -12,6 +12,10 @@ public class UserDTO {
     private String userEmail;
     private String userPassword;
 
+    public UserDTO()
+    {
+    }
+
     public UserDTO(User user)
     {
         BeanUtils.copyProperties(user, this);
